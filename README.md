@@ -1,28 +1,7 @@
-Coding Exercise
+Answer to a Coding Exercise
 ===============
 
-Hey there!
-
-Thanks for taking a look at this coding exercise.  UserTesting uses this exercise as part of it's interviewing process for coding related positions.
-
-# Exercise instructions
-* Fork this repo
-* Complete the exercise using any language you like
-* Submit your results via pull request
-
-# Setup
-
-You are free to implement any mechanism for feeding input into your
-solutions (for example, using hard coded data within a unit test). You
-should provide sufficient evidence that your solution is complete by,
-as a minimum, indicating that it works correctly against the supplied
-test data.
-
-We highly recommend using a unit testing framework such as RSpec
-(Ruby) or Jasmine (JavaScript). Even if you have not used it before,
-it is simple to learn and incredibly useful. The code you write should
-be of production quality, and most importantly, it should be code you
-are proud of.
+UserTesting uses this exercise as part of it's interviewing process for coding related positions.
 
 # Lockerz
 
@@ -39,3 +18,12 @@ There are 1000 small lockers, 1000 medium-­‐sized lockers, and 1000
 large lockers (it’s a big Vegas hotel). You can assume that all
 checked bags fit into one of these three sizes. The program should
 always assign the smallest available locker that fits the bag.
+
+# Lockerz Solution
+
+The general approach is that there will be three javascript arrays with 1000
+elements each that represent the three types of lockers. The program initialises
+the arrays with 0's and as each bag is assigned to a locker of the appropriate
+type, the appropriate array element is set to 1.
+
+For assigning a bag to a locker, the three locker types are 'looked=up'
