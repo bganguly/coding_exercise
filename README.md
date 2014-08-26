@@ -26,7 +26,7 @@ elements each that represent the three types of lockers. The program initialises
 the arrays with 0's and as each bag is assigned to a locker of the appropriate
 type, the appropriate array element is set to 1.
 
-For assigning a bag to a locker, the three locker types are 'looked=up' starting
+For assigning a bag to a locker, the three locker types are 'looked-up' starting
 with the smallest bagtype first. Once an empty slot is found (as evidenced by a
 0 in the array element), that slot is updated to 1, and the slot number and the
 locker types are returnes as an object and passed to a helper print function
@@ -35,3 +35,16 @@ that simulates printing a ticket for the customer (does a console.log).
 For retreiving a stored bag from a locker, the lockernumber and the lockertype
 are read in (these should be available from the ticket that the customer has),
 and the appropriate slot is then set to 0.
+
+An alternative mechanism would have been to write/read just a single bag number
+and then cycle through each array, from the smallest bagtype upwards, unless
+you find an available slot. This would have required at least 3x number of
+operations, hence not attempted.
+
+# Supporting code
+
+In order to make it easier for the browser to render the tests, i have put in
+a standard jasmine stand-alone lib folder. This folder is just a smaller subset
+of the code available on pivotals jasmine github repo and does not contribute
+to the solution in any way. I also added in a SpecRunner.html file for rendering
+the test results in the browser and the usual karma config files for karma runs.
