@@ -32,11 +32,12 @@ var arrayInitHelper = function(lengthOfArrayToInitialise, valueToInitialise) {
  * as an object literal.
  */
 var initLockersHelper = function(arrayLength, initialValue) {
-    return {
+    var initLockersObject = {
         SMALL_BAG_LOCKERS : arrayInitHelper(arrayLength, initialValue),
         MEDIUM_BAG_LOCKERS : arrayInitHelper(arrayLength, initialValue),
         LARGE_BAG_LOCKERS : arrayInitHelper(arrayLength, initialValue)
-    }
+    };
+    return initLockersObject;
 }
 
 /**
@@ -48,12 +49,13 @@ var printTicketHelper = function(bagTicketObject) {
     var lockerType = bagTicketObject && bagTicketObject.lockerType ?
       bagTicketObject.lockerType : null;
     if (lockerNum != null  && lockerType != null) {
-      console.log("Greetings Human! We found locker # %i for your bag in" +
-        "the %s lockers area. \nPlease retain this ticket.", lockerNum,
+      console.log("Greetings Human! We found locker # %d for your bag in" +
+        " the %s lockers area. \nPlease retain this ticket as we would need " +
+        "it later to deliver your bag.", lockerNum,
         lockerType);
     } else {
         console.log("Apologies Human! We have run out of lockers. You are" +
-        "on your own. \nWelcome to Vegas!");
+        " on your own. \nWelcome to Vegas!");
     }
 }
 
@@ -81,7 +83,7 @@ var updateBagTicketObject = function(bagTicketObject, lockerNum, lockerType) {
  * bag/locker allocated) for the customer to retain. Uses Array.indexOf, which
  * is only available in ES5 and above, and typically not available below IE9.
  */
-var setBagInLocker = function(bagType) {
+var setBagInLocker = function(bagType, initLockersObject) {
     var bagTicketObject = {}, lockerNum, lockerType, lockerArray;
     switch (bagType) {
       case SMALL_BAG:
@@ -115,48 +117,26 @@ var setBagInLocker = function(bagType) {
         }
     }
     printTicketHelper(bagTicketObject);
+    return initLockersObject;
 }
 
 /**
  * Retreives a bag from locker and frees up that locker for use by another bag.
  */
-var getBagFromLocker = function(lockerNum, lockerType) {
+var getBagFromLocker = function(lockerNum, lockerType, initLockersObject) {
+    var lockerArray;
     switch (lockerType) {
       case SMALL_BAG_LOCKERS:
-        initLockersObject.SMALL_BAG_LOCKERS[lockerNum -1] = 0;
+        lockerArray = initLockersObject.SMALL_BAG_LOCKERS;
+        lockerArray[lockerNum -1] = 0;
         break;
       case MEDIUM_BAG_LOCKERS:
-        initLockersObject.MEDIUM_BAG_LOCKERS[lockerNum -1] = 0;
+        lockerArray = initLockersObject.MEDIUM_BAG_LOCKERS;
+        lockerArray[lockerNum -1] = 0;
         break;
       case LARGE_BAG_LOCKERS:
-        initLockersObject.LARGE_BAG_LOCKERS[lockerNum -1] = 0;
+        lockerArray = initLockersObject.LARGE_BAG_LOCKERS;
+        lockerArray[lockerNum -1] = 0;
     }
+    return initLockersObject;
 }
-
-/**
- * Sets up the numbers of lockers available for each locker type. This value can
- * be changed repeatedly for unit testing.
- */
-var arrayLength = 10;
-
-/**
- * Initialises an object literal with named arrays.
- * There are three types of lockers available, and the below object tracks these
- * as three named arrays in an object literal. Each named array is initially
- * populated with zero'es and is updated with one's as bags are stored in the
- * lockers. When a stored bag is retreived from a locker, the corresponding
- * array element is reset to zero.
- */
-var initLockersObject = initLockersHelper(arrayLength, 0);
-
-/**
- * Sample test run.
- */
-setBagInLocker(SMALL_BAG);
-setBagInLocker(SMALL_BAG);
-setBagInLocker(SMALL_BAG);
-setBagInLocker(SMALL_BAG);
-getBagFromLocker(2, SMALL_BAG_LOCKERS);
-setBagInLocker(SMALL_BAG);
-setBagInLocker(LARGE_BAG);
-setBagInLocker(SMALL_BAG);
